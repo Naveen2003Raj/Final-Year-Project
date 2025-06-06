@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document Upload</title>
+    <link rel="stylesheet" href="../static/document_upload.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Aadhaar & Ration Card</h2>
+
+        <div class="button-group">
+            <button onclick="toggleForm('aadhaarForm')" class="btn aadhaar-btn">Aadhaar</button>
+            <button onclick="toggleForm('smartForm')" class="btn smart-btn">Smart Card</button>
+        </div>
+
+        <form action="/document_upload" method="post" enctype="multipart/form-data">
+            <div id="aadhaarForm" class="upload-form">
+                <label>Select Aadhaar QR Image:</label>
+                <input type="file" name="aadhaarFile" required>
+            </div>
+            <div id="smartForm" class="upload-form" style="display: none;">
+                <label>Select Smart Card QR Image:</label>
+                <input type="file" name="smartFile" required>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        {% if aadhaar and smart %}
+        <div class="result-section">
+            <h3>Verification Result</h3>
+            <div class="match-status">{{ aadhaar_match }}</div>
+            <div class="match-status">{{ ration_match }}</div>
+            <div class="cross-match">{{ cross_match }}</div>
+
+            <div class="card-wrapper">
+                <div class="card aadhaar">
+                    <h4>Aadhaar Details</h4>
+                    <p><strong>Name:</strong> {{ aadhaar.user_name }}</p>
+                    <p><strong>Aadhaar Number:</strong> {{ aadhaar.aadhaar_number }}</p>
+                    <p><strong>DOB:</strong> {{ aadhaar.dob }}</p>
+                    <p><strong>Gender:</strong> {{ aadhaar.gender }}</p>
+                    <p><strong>Mobile:</strong> {{ aadhaar.mobile }}</p>
+                    <p><strong>Address:</strong> {{ aadhaar.address }}</p>
+                </div>
+                <div class="card smart">
+                    <h4>Smart Card Details</h4>
+                    <p><strong>Card Number:</strong> {{ smart.card_number }}</p>
+                    <p><strong>Card Type:</strong> {{ smart.card_type }}</p>
+                    <p><strong>Head of Family:</strong> {{ smart.head_of_family }}</p>
+                    <p><strong>Address:</strong> {{ smart.address }}</p>
+                    <p><strong>Family Members:</strong> {{ smart.family_members }}</p>
+                    <p><strong>Issued By:</strong> {{ smart.issued_by }}</p>
+                    <p><strong>Aadhaar Linked:</strong> {{ smart.aadhaar_link_status }}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <a href="{{ url_for('user_form') }}" class="next-button">Next</a>
+    </div>
+<script>
+    function toggleForm(formId) {
+        document.getElementById('aadhaarForm').style.display = 'none';
+        document.getElementById('smartForm').style.display = 'none';
+        document.getElementById(formId).style.display = 'block';
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const spinner = document.createElement("div");
+        spinner.classList.add("spinner");
+        form.appendChild(spinner);
+
+        form.addEventListener("submit", function (e) {
+            spinner.style.display = "block";
+            document.querySelector('.submit-btn').style.display = "none";
+        });
+
+        // Reveal result and next-button on load (Jinja block condition assumed)
+        {% if aadhaar and smart %}
+            window.addEventListener('load', function () {
+                document.querySelector('.result-section').style.display = "block";
+                document.querySelector('.next-button').style.display = "inline-block";
+            });
+        {% endif %}
+    });
+</script>
+
+
+</body>
+</html>

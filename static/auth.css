@@ -1,0 +1,172 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #2c3e50, #34495e); /* medium-dark background */
+    margin: 0;
+    padding: 0;
+    color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    background: #2a2f38;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 420px;
+    animation: fadeInUp 1s ease forwards;
+    
+    /* Add transition for smooth hover effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hover zoom and subtle float */
+.container:hover {
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+
+.tab {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.1rem;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab.active {
+    color: #00d8ff;
+    font-weight: bold;
+    border-bottom: 2px solid #00d8ff;
+}
+
+.form {
+    display: none;
+    flex-direction: column;
+}
+
+.form.active {
+    display: flex;
+    animation: slideIn 0.6s ease;
+}
+
+form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00d8ff;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #555;
+    border-radius: 8px;
+    width: 100%;
+    background: #3a3f48;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+input:focus {
+    border-color: #00d8ff;
+    background: #4a505b;
+    box-shadow: 0 0 8px rgba(0, 216, 255, 0.3);
+    outline: none;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 15px;
+    background: #00d8ff;
+    color: #000;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.glow-button:hover {
+    background: #00c9e6;
+    box-shadow: 0 0 15px rgba(0, 216, 255, 0.6);
+    transform: scale(1.03);
+}
+
+.mobile-otp {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.mobile-otp input {
+    flex: 1;
+}
+
+.otp-field.hidden {
+    display: none;
+}
+
+.error {
+    color: #ff4d4d;
+    text-align: center;
+    margin-bottom: 10px;
+    display: none; /* Now hidden by default */
+}
+
+form:has(.error:empty) .error {
+    display: none;
+}
+
+form:has(.error:not(:empty)) .error {
+    display: block;
+}
+.error-message {
+    background-color: #ff4d4d;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}

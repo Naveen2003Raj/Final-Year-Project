@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Eligibility Results</title>
+    <link rel="stylesheet" href="../static/eligibility_results.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Loan Eligibility Results</h1>
+        
+        {% if eligibility == "Eligible" %}
+            <div class="result-box eligible">
+                <h2>✅ You are eligible for the loan waiver!</h2>
+                <p>Confidence: {{ probability }}</p>
+            </div>
+        {% elif eligibility == "Not Eligible" %}
+            <div class="result-box not-eligible">
+                <h2>❌ You are not eligible for the loan waiver</h2>
+                <p>Confidence: {{ probability }}</p>
+            </div>
+        {% elif eligibility == "Error" %}
+            <div class="result-box error">
+                <h2>⚠️ Error in determining eligibility</h2>
+                <p>{{ explanation }}</p>
+            </div>
+        {% else %}
+            <div class="result-box pending">
+                <h2>⏳ Your application is being processed</h2>
+                <p>Please wait while we review your information.</p>
+            </div>
+        {% endif %}
+        
+        {% if eligibility != "Error" and eligibility != "Pending" and eligibility != "Unknown" %}
+            <div class="explanation">
+                <h3>Explanation:</h3>
+                <p>{{ explanation|replace('\n', '<br>')|safe }}</p>
+            </div>
+        {% endif %}
+        
+        <div class="details">
+            <h3>Your Details</h3>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Name:</span>
+                    <span>{{ user_name }}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Aadhaar Number:</span>
+                    <span>{{ aadhaar_number }}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Card Number:</span>
+                    <span>{{ card_number }}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Card Type:</span>
+                    <span>{{ card_type }}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Mobile:</span>
+                    <span>{{ mobile }}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Occupation:</span>
+                    <span>{{ occupation }}</span>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        <a href="{{ url_for('select_scheme') }}" class="btn">Back to Schemes</a>
+        <a href="{{ url_for('eligibility_results_preview') }}" class="btn btn-primary">
+    Generate Preview
+</a>
+ 
+    </div>
+</body>
+</html>
+
+
+
+

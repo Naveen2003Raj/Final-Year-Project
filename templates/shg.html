@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SHG Loan Waiver Eligibility Form</title>
+    <link rel="stylesheet" href="../static/shg.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>SHG Loan Waiver Eligibility Form</h2>
+        <form action="/shg_form" method="POST">
+            <!-- SHG Basic Info -->
+            <fieldset>
+                <legend>SHG Information</legend>
+
+                <label for="group_name">SHG Group Name:</label>
+                <input type="text" id="group_name" name="group_name" required>
+
+                <label for="formation_year">SHG Formation Year:</label>
+                <select id="formation_year" name="formation_year" required>
+                    <option value="">Select</option>
+                    <option>2021</option>
+                    <option>2022</option>
+                    <option>2023</option>
+                    <option>2024</option>
+                </select>
+
+                <label for="member_count">Member Count:</label>
+                <select id="member_count" name="member_count" required>
+                    <option value="">Select</option>
+                    <option>less than 10</option>
+                    <option>10 to 15</option>
+                    <option>above 15</option>
+                </select>
+            </fieldset>
+
+            <!-- Loan Details -->
+            <fieldset>
+                <legend>Loan Details</legend>
+
+                <label for="loan_amount">Loan Amount:</label>
+                <select id="loan_amount" name="loan_amount" required>
+                    <option value="">Select</option>
+                    <option>less than 1Lakh</option>
+                    <option>1Lakh to 2Lakh</option>
+                    <option>above 2Lakh</option>
+                </select>
+
+                <label for="loan_provider_bank">Loan Provider Bank:</label>
+                <select id="loan_provider_bank" name="loan_provider_bank" required>
+                    <option value="">Select</option>
+                    <option>Indian Bank</option>
+                    <option>IOB</option>
+                    <option>Canara Bank</option>
+                    <option>Co-operation Bank</option>
+                    <option>Grama Bank</option>
+                    <option>Axis Bank</option>
+                </select>
+
+                <label for="interest_rate">Interest Rate (%):</label>
+                <select id="interest_rate" name="interest_rate" required>
+                    <option value="">Select</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                </select>
+
+                <label for="repayment_status">Repayment Status:</label>
+                <select id="repayment_status" name="repayment_status" required>
+                    <option value="">Select</option>
+                    <option>On-time</option>
+                    <option>Irregular</option>
+                    <option>Defaulted</option>
+                </select>
+
+                <label for="loan_usage">Loan Usage:</label>
+                <select id="loan_usage" name="loan_usage" required>
+                    <option value="">Select</option>
+                    <option>Livelihood</option>
+                    <option>Productive Asset</option>
+                    <option>Other</option>
+                </select>
+            </fieldset>
+
+            <!-- Socio-Economic Data -->
+            <fieldset>
+                <legend>Socio-Economic Details</legend>
+
+                <label for="card_type">Card Type:</label>
+                <select id="card_type" name="card_type" required>
+                    <option value="">Select</option>
+                    <option>PHH</option>
+                    <option>NPHH</option>
+                    <option>PHH AYY</option>
+                </select>
+
+                <label for="annual_income">Annual Income (Including Self):</label>
+                <select id="annual_income" name="annual_income" required>
+                    <option value="">Select</option>
+                    <option>less than 90K</option>
+                    <option>above 90K</option>
+                </select>
+
+                <label for="waiver_reason">Waiver Reason:</label>
+                <select id="waiver_reason" name="waiver_reason" required>
+                    <option value="">Select</option>
+                    <option>Economic Hardship</option>
+                    <option>COVID Impact</option>
+                    <option>Crop Failure</option>
+                    <option>Health Emergency</option>
+                </select>
+
+                
+
+                <label for="earning_members">Household Earning Members (Including Self):</label>
+                <select id="earning_members" name="earning_members">
+                    <option value="">Select</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>above 2</option>
+                </select>
+            </fieldset>
+
+        
+
+            <div class="submit-btn">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

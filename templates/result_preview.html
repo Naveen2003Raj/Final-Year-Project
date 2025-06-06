@@ -1,0 +1,91 @@
+{# ------------------------------------------------------------
+  eligibility_preview.html
+------------------------------------------------------------- #}
+
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-4">
+
+  <div class="d-flex justify-content-between align-items-center">
+      <h3>Eligibility Summary Preview</h3>
+
+      <!-- Download icon -->
+      <a href="{{ url_for('eligibility_results_download') }}"
+         class="text-decoration-none" title="Download PDF">
+          <i class="bi bi-download fs-3"></i>
+      </a>
+  </div>
+  <hr>
+
+  <!-- ── Personal ─────────────────────────────────────────── -->
+  <h5 class="mt-3">Personal Details</h5>
+  <table class="table table-sm">
+      <tr><th>Name</th>             <td>{{ session.get('user_name') }}</td></tr>
+      <tr><th>Aadhaar Number</th>   <td>{{ session.get('aadhaar_number') }}</td></tr>
+      <tr><th>Smart Card Number</th><td>{{ session.get('card_number') }}</td></tr>
+      <tr><th>Card Type</th>        <td>{{ session.get('card_type') }}</td></tr>
+      <tr><th>Mobile</th>           <td>{{ session.get('mobile') }}</td></tr>
+      <tr><th>Address</th>          <td>{{ session.get('address') }}</td></tr>
+  </table>
+  
+  <h5 class="mt-4">Bank Details</h5>
+  <table class="table table-sm">
+      <tr><th>Account Number</th> <td>{{ session.get('account_number') }}</td></tr>
+      <tr><th>Bank Name</th>      <td>{{ session.get('bank_name') }}</td></tr>
+      <tr><th>Branch</th>         <td>{{ session.get('branch') }}</td></tr>
+      <tr><th>IFSC Code</th>      <td>{{ session.get('ifsc_code') }}</td></tr>
+      <tr><th>Account Type</th>   <td>{{ session.get('account_type') }}</td></tr>
+      <tr><th>Subsidy Applied</th><td>{{ session.get('subsidy_applied') }}</td></tr>
+  </table>
+
+  <!-- ── Agriculture Loan ─────────────────────────────────── -->
+  {% if session.selected_scheme == 'Agriculture' %}
+  <h5 class="mt-4">Agriculture Loan Details</h5>
+  <table class="table table-sm">
+      <tr><th>Loan Amount</th>      <td>{{ session.get('Loan_Amount') }}</td></tr>
+      <tr><th>Land Size</th>        <td>{{ session.get('Land_Size') }}</td></tr>
+      <tr><th>Repayment Status</th> <td>{{ session.get('Repayment_Status') }}</td></tr>
+      <tr><th>Tenure</th>           <td>{{ session.get('Loan_Tenure') }}</td></tr>
+      <tr><th>Collateral Type</th>  <td>{{ session.get('Collateral_Type') }}</td></tr>
+      <tr><th>Collateral Value</th> <td>{{ session.get('Collateral_Value') }}</td></tr>
+      <tr><th>Subsidy</th>          <td>{{ session.get('Subsidy') }}</td></tr>
+  </table>
+  {% endif %}
+
+  <!-- ── Gold Loan ────────────────────────────────────────── -->
+  {% if session.selected_scheme == 'Gold' %}
+  <h5 class="mt-4">Gold Loan Details</h5>
+  <table class="table table-sm">
+      <tr><th>Loan Amount</th>    <td>{{ session.get('Loan_Amount') }}</td></tr>
+      <tr><th>Gold Type</th>      <td>{{ session.get('Gold_Type') }}</td></tr>
+      <tr><th>Gold Weight</th>    <td>{{ session.get('Gold_Weight') }}</td></tr>
+      <tr><th>Gold Purity</th>    <td>{{ session.get('Gold_Purity') }}</td></tr>
+      <tr><th>Repayment Years</th><td>{{ session.get('Years_of_Repayment') }}</td></tr>
+      <tr><th>Interest Rate</th>  <td>{{ session.get('Interest_Rate') }}</td></tr>
+      <tr><th>Subsidy</th>        <td>{{ session.get('Subsidy') }}</td></tr>
+  </table>
+  {% endif %}
+
+  <!-- ── SHG Loan ─────────────────────────────────────────── -->
+  {% if session.selected_scheme == 'shg' %}
+  <h5 class="mt-4">SHG Loan Details</h5>
+  <table class="table table-sm">
+      <tr><th>Formation Year</th> <td>{{ session.get('formation_year') }}</td></tr>
+      <tr><th>Members</th>        <td>{{ session.get('member_count') }}</td></tr>
+      <tr><th>Loan Amount</th>    <td>{{ session.get('loan_amount') }}</td></tr>
+      <tr><th>Provider Bank</th>  <td>{{ session.get('loan_provider_bank') }}</td></tr>
+      <tr><th>Annual Income</th>  <td>{{ session.get('annual_income') }}</td></tr>
+      <tr><th>Loan Usage</th>     <td>{{ session.get('loan_usage') }}</td></tr>
+  </table>
+  {% endif %}
+
+  <!-- ── Result ───────────────────────────────────────────── -->
+  <h5 class="mt-4">Eligibility Result</h5>
+  <table class="table table-sm">
+      <tr><th>Status</th>      <td>{{ session.get('eligibility', 'Unknown') }}</td></tr>
+      <tr><th>Probability</th> <td>{{ session.get('eligibility_probability', '–') }}</td></tr>
+      <tr><th>Explanation</th> <td>{{ session.get('eligibility_explanation', 'No data') }}</td></tr>
+  </table>
+
+</div>
+{% endblock %}

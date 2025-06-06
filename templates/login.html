@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="../static/login.css">
+</head>
+<body>
+    <h2>Login</h2>
+
+    {% if error %}
+      <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" onsubmit="return showSuccess()">
+        <input type="text" name="mobile" placeholder="Mobile Number" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+      function showSuccess() {
+        alert("Login Successful ✅");
+        return true; // allow form to submit
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aadhaar Data Extraction</title>
+    <link rel="stylesheet" href="../static/upload.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Upload Form -->
+        <div class="upload-box">
+            <h2>Upload Aadhaar Image</h2>
+            <form action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showLoader()">
+                <input type="file" name="aadhaarFile" required>
+                <button type="submit">Upload</button>
+            </form> 
+        </div>
+
+        <!-- Error -->
+        {% if error %}
+            <p class="error" style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <!-- Loading Animation -->
+        {% if loading %}
+        <div class="loading-container">
+            <p>🔄 Extracting and Matching Aadhaar Data...</p>
+            <div class="spinner"></div>
+        </div>
+        {% endif %}
+
+        <!-- Extracted Results -->
+        {% if extracted_text %}
+        <div class="result-box">
+            <h3>Extracted Aadhaar Details</h3>
+
+            <p><strong>Aadhaar Number:</strong> {{ session['aadhaar_number'] }}</p>
+            <p><strong>Name:</strong> {{ session['user_name'] }}</p>
+            <p><strong>DOB:</strong> {{ session['dob'] }}</p>
+            <p><strong>Gender:</strong> {{ session['gender'] }}</p>
+            <p><strong>Mobile:</strong> {{ session['mobile'] }}</p>
+            <p><strong>Address:</strong><br>{{ session['address'] }}</p>
+
+            {% if match_result %}
+            <p><strong>Status:</strong> 
+                <span style="color: {% if '✅' in match_result %}green{% else %}red{% endif %}; font-weight: bold;">
+                    {{ match_result }}
+                </span>
+            </p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Next Step Button -->
+        {% if match_result %}
+        <a href="{{ url_for('smart_upload_page') }}" class="next-button">Next</a>
+        {% endif %}
+    </div>
+
+    <!-- Optional JS for loader -->
+    <script>
+        function showLoader() {
+            const loadingDiv = document.createElement("div");
+            loadingDiv.className = "loading-container";
+            loadingDiv.innerHTML = `
+                <p>🔄 Extracting and Matching Aadhaar Data...</p>
+                <div class="spinner"></div>
+            `;
+            document.querySelector(".main-container").appendChild(loadingDiv);
+        }
+    </script>
+</body>
+</html>

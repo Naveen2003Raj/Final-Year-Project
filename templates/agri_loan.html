@@ -1,0 +1,139 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Loan Form</title>
+    <link rel="stylesheet" href="/static/agri_loan.css">   
+
+</head>
+<body>
+    <div class="container">
+        <h2>Agriculture Loan Waiver Form</h2>
+        
+        <form action="{{ url_for('loan_waiver_form') }}" method="POST">
+            <div class="form-group">
+                <label for="loan_amount">Loan Amount:</label>
+                <select name="loan_amount" id="loan_amount" required>
+                    <option value="">-- Select Loan Amount --</option>
+                    <option value="less than 50k">Less than ₹50,000</option>
+                    <option value="60k-1Lakh">₹60,000 - ₹1,00,000</option>
+                    <option value="1Lakh -2Lakh">₹1,00,000 - ₹2,00,000</option>
+                    <option value="<2Lakh">More than ₹2,00,000</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="land_size">Land Size:</label>
+                <select name="land_size" id="land_size" required>
+                    <option value="">-- Select Land Size --</option>
+                    <option value="1-2 acres">1-2 acres</option>
+                    <option value="2-4 acres">2-4 acres</option>
+                    <option value="5-6 acres">5-6 acres</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="repayment_status">Repayment Status:</label>
+                <select name="repayment_status" id="repayment_status" required>
+                    <option value="">-- Select Repayment Status --</option>
+                    <option value="Fully paid">Fully paid</option>
+                    <option value="Default">Default</option>
+                    <option value="Partially paid">Partially paid</option>
+                </select>
+            </div>
+             <div class="form-group">
+                <label for="annual_income">Annual Income:</label>
+                <select name="annual_income" id="annual_income" required>
+                    <option value="">-- Select Annual Income --</option>
+                    <option value="Below 80k">Below ₹80,000</option>
+                    <option value="Above 80K">Above ₹80,000</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="loan_tenure">Loan Tenure:</label>
+                <select name="loan_tenure" id="loan_tenure" required>
+                    <option value="">-- Select Loan Tenure --</option>
+                    <option value="less than 3 yrs">less than 3 yrs</option>
+                    <option value="above 3 yrs">above 3 yrs</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="interest_rate">Interest Rate:</label>
+                <select name="interest_rate" id="interest_rate" required>
+                    <option value="">-- Select Interest Rate --</option>
+                    <option value="less than 4%">less than 4%</option>
+                    <option value="5%">5%</option>
+                    <option value="6%">6%</option>
+                    <option value="7%">7%</option>
+                </select>"
+            </div>
+            <div class="form-group">
+                <label for="collateral_type">Collateral Type:</label>
+                <select name="collateral_type" id="collateral_type" required>
+                    <option value="">-- Select Collateral Type --</option>
+                    <option value="Land">Land</option>
+                    <option value="Vehicle">Vehicle</option>
+                    <option value="Gold">Gold</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="collateral_value">Collateral Value:</label>
+                <select name="collateral_value" id="collateral_value" required>
+                    <option value="">-- Select Collateral Value --</option>
+                    <option value="<50k">Less than ₹50,000</option>
+                    <option value="60k-1Lakh">₹60,000 - ₹1,00,000</option>
+                    <option value=">1Lakh">More than ₹1,00,000</option>
+                </select>
+            </div>
+            
+           <div class="form-group">
+                <label for="subsidy_type">Subsidy Applied:</label>
+                <select name="subsidy_type" id="subsidy_type" required>
+                    <option value="">-- Select Option --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="loan_purpose">Loan Purpose:</label>
+                <select name="loan_purpose" id="loan_purpose" required>
+                    <option value="">-- Select Loan Purpose --</option>
+                    <option value="Crop">Crop cultivation</option>
+                    <option value="Livestock">Livestock</option>
+                    <option value="Irrigation">Irrigation</option>
+                    <option value="Machinery">Machinery</option>
+                </select>
+            </div>
+            
+           <div class="form-group">
+                <label for="ration_card_type">Ration Card Type:</label>
+                <select name="ration_card_type" id="ration_card_type" required>
+                    <option value="">-- Select Ration Card Type --</option>
+                    <option value="PHH">PHH (Above Poverty Line)</option>
+                    <option value="NPHH">NPHH (Below Poverty Line)</option>
+                    <option value="PHH AYY">PHH AYY (Above Poverty Line)</option>
+                </select>
+            </div>
+            
+            
+            
+            <div class="form-group">
+                <label for="previous_loan_history">Previous Loan History:</label>
+                <select name="previous_loan_history" id="previous_loan_history" required>
+                    <option value="">-- Select Previous Loan History --</option>
+                    <option value="No Loan">No previous loans</option>
+                    <option value="1-2 Loans">1-2 Loans</option>
+                    <option value=">2 Loans">>2 Loans</option>
+                </select>
+            </div>
+            
+           
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Loan / User Details</title>
+
+    <!--  Simple CSS  -->
+    <link rel="stylesheet" href="../static/loan_form.css">
+</head>
+<body>
+
+<div class="container">
+  <form id="loanForm" action="{{ url_for('user_form') }}" method="post">
+    <h2 class="title">Loan & User Information</h2>
+
+    <!-- ─── BASIC USER / LOAN DETAILS ─────────────────────────────── -->
+    <div class="grid‑two">
+      <div class="form‑group">
+        <label>Name</label>
+        <input type="text" name="user_name" value="{{ user_name }}" readonly>
+      </div>
+      <div class="form‑group">
+        <label>Aadhaar No.</label>
+        <input type="text" name="aadhaar" value="{{ aadhaar_number }}" readonly>
+      </div>
+      <div class="form‑group">
+        <label>Smart Card No.</label>
+        <input type="text" name="card_number" value="{{ card_number }}" readonly>
+      </div>
+      <div class="form‑group">
+        <label>Smart Card Type</label>
+        <input type="text" name="card_type" value="{{ card_type }}" readonly>
+      </div>
+      <div class="form‑group">
+        <label>Mobile</label>
+        <input type="text" name="mobile" value="{{ mobile }}" readonly>
+      </div>
+      <div class="form‑group">
+        <label>Address</label>
+        <input type="text" name="address" value="{{ address }}" readonly>
+      </div>
+      <div class="form-group">
+        <label for="occupation">occupation</label>
+        <select name="occupation" id="occupation" onchange="showOccupationFields(this.value)" required>
+          <option value="">Select Occupation</option>
+          <option value="Skilled Labor" {% if work == "Skilled Labor" %}selected{% endif %}>Skilled Labor</option>
+          <option value="Agriculture" {% if work == "Agriculture" %}selected{% endif %}>Agriculture</option>
+          <option value="Government" {% if work == "Government" %}selected{% endif %}>Government</option>
+          <option value="Business" {% if work == "Business" %}selected{% endif %}>Business</option>
+          <option value="Private Sector" {% if occupation == "Private Sector" %}selected{% endif %}>Private Sector</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="annual_income_range">Annual Income Range:</label>
+        <select name="annual_income_range" id="income_range" >
+          <option value="">Select Income Range</option>
+          <option value="below_70000" {% if annual_income_range == "below_70000" %}selected{% endif %}>Below ₹70,000</option>
+          <option value="above_70000" {% if annual_income_range == "above_70000" %}selected{% endif %}>Above ₹70,000</option>
+        </select>
+      </div>  
+    </div>
+
+    <!-- ─── DYNAMIC OCCUPATION‑SPECIFIC FIELDS (UNCHANGED CONTENT) ── -->
+    <div class="dynamic‑wrapper right">
+      <!-- paste begins -->
+      <!-- ********************************************************** -->
+      <div id="skilledFields" class="hidden">
+        <div class="form-group">
+        <label>Work Type:</label>
+        <select name="skilled_work_type">
+          <option value="">Select Work</option>
+          <option value="construction">Construction</option>
+          <option value="plumbing">Plumbing</option>
+          <option value="electrician">Electrician</option>
+          <option value="mechanic">Mechanic</option>
+          <option value="carpenter">Carpenter</option>
+          <option value="mason">Mason</option>
+          <option value="welder">Welder</option>
+          <option value="tailor">Tailor</option>
+          <option value="driver">Driver (Auto/Taxi/Truck)</option>
+          <option value="barber">Barber</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Years of Experience:</label>
+        <input type="number" name="labor_exp"/>
+        </div>
+        <div class="form-group">
+        <label>Daily or Monthly Income (₹):</label>
+        <select name="income_type">
+          <option value="">Select</option>
+          <option value="Daily">Daily</option>
+          <option value="Monthly">Monthly</option>
+        </select>
+        </div>
+
+        <div class="form-group">
+        <label>Working Hours per Day:</label>
+        <input type="number" name="labor_hours"/>
+        </div>
+        <div class="form-group">
+        <label>House Type:</label>
+        <select name="house_type">
+          <option value="">Select</option>
+          <option value="Owned">Owned</option>
+          <option value="rented">rented</option>
+        </select>
+        </div>
+      </div>
+
+      <!-- Agriculture -->
+      <div id="agricultureFields" class="hidden">
+        <div class="form-group">
+        <label>Work Type:</label>
+        <select name="land_type">
+          <option value="">Select</option>
+          <option value="Farmer">Farmer</option>
+          <option value="Agricultural Laborer">Agricultural Laborer</option>
+          <option value="Fisherman">Fisherman</option>
+          <option value="Animal Husbandry Worker">Animal Husbandry Worker</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Land Ownership Type:</label>
+        <select name="land_ownership">
+          <option value="">Select</option>
+          <option value="Owned">Owned</option>
+          <option value="rented">rented</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Crop Type(s):</label>
+        <select name="crop_type">
+          <option value="">Select</option>
+          <option value="Rice">Rice</option><option value="Wheat">Wheat</option>
+          <option value="Maize">Maize</option><option value="Cotton">Cotton</option>
+          <option value="Sugarcane">Sugarcane</option><option value="Paddy">Paddy</option>
+          <option value="Vegetable">Vegetable</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Irrigation Type:</label>
+        <select name="irrigation_type">
+          <option value="">Select</option><option value="Well">Well</option>
+          <option value="Tank">Tank</option><option value="River">River</option>
+          <option value="Canal">Canal</option><option value="Borewell">Borewell</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Annual Yield (kg):</label>
+        <input type="number" name="yield"/>
+        </div>
+      </div>
+
+      <!-- Government -->
+      <div id="governmentFields" class="hidden">
+        <div class="form-group">
+        <label>Department:</label>
+        <select name="gov_dept">
+          <option value="">Select</option>
+          <option>Indian Army</option><option>Indian Navy</option><option>Indian Air Force</option>
+          <option>CAPF</option><option>State Police</option><option>Railway Protection Force</option>
+          <option>Home Guards</option><option>Others</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Rank / Designation:</label>
+        <select name="gov_role">
+          <option value="Constable">Constable</option><option value="Head Constable">Head Constable</option>
+          <option value="Sub Inspector">Sub Inspector</option><option value="Inspector">Inspector</option>
+          <option value="Assistant Commandant">Assistant Commandant</option>
+          <option value="Deputy Commandant">Deputy Commandant</option>
+          <option value="Major / DSP or Equivalent">Major / DSP</option>
+          <option value="Lieutenant Colonel / SP">Lt. Colonel / SP</option>
+          <option value="Colonel / SSP">Colonel / SSP</option>
+          <option value="Brigadier and above / DIG+">Brigadier / DIG+</option>
+          <option value="Others">Others</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Monthly Gross Salary (₹):</label>
+        <input type="number" name="gross_salary">
+        </div>
+        <div class="form-group">
+        <label>Work Experience (years):</label>
+        <input type="number" name="work_experience">
+        </div>
+      </div>
+
+      <!-- Business / Self‑Employed -->
+      <div id="businessFields" class="hidden">
+        <div class="form-group">
+        <label>Business Type:</label>
+        <select name="business_type" onchange="toggleBusinessDetails(this.value)">
+          <option value="">Select</option>
+          <option value="small">Small Scale</option><option value="large">Large Scale</option>
+          <option value="Vendor">Vendor</option><option value="Freelancer">Freelancer</option>
+          <option value="Beautician">Beautician</option><option value="Real estate agent">Real estate agent</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Business Name:</label><input type="text" name="small_business_name">
+        </div>
+        <div class="form-group">
+        <label>Location:</label><input type="text" name="small_business_location">
+        </div>
+        <div class="form-group">
+        <label>Members / Workers:</label><input type="number" name="no_of_members">
+        </div>
+        <div class="form-group">
+        <label>Monthly Income:</label><input type="text" name="monthly_income">
+        </div>
+        <div class="form-group">
+        <label>Do you have GST?</label>
+        <select name="has_gst">
+          <option value="yes">Yes</option><option value="no">No</option>
+        </select>
+        </div>
+      </div>
+
+      <!-- Private Sector -->
+      <div id="privateFields" class="hidden">
+        <div class="form-group">
+        <label>Company Type:</label>
+        <select name="company_name">
+          <option value="">Select</option><option>IT</option><option>Banking</option><option>Finance</option>
+          <option>Office Staff</option><option>Call Center</option><option>Manager</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Company Name:</label><input type="text" name="private_company">
+        </div>
+        <div class="form-group">
+        <label>Job Role:</label>
+        <select name="private_role">
+          <option value="">--Select Role--</option><option>Junior Staff</option><option>Executive</option>
+          <option>Manager</option><option>Senior Manager</option><option>Director / VP</option><option>Other</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Salary Range:</label>
+        <select name="private_salary_range">
+          <option value="">--Select--</option><option>Below ₹10,000</option><option>₹10,000‑25,000</option>
+          <option>₹25,001‑50,000</option><option>₹50,001‑1,00,000</option><option>Above ₹1,00,000</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Monthly Salary:</label><input type="number" name="private_salary">
+        </div>
+        <div class="form-group">
+        <label>Paying Income Tax?</label>
+        <select name="private_salary_type">
+          <option value="yes">Yes</option><option value="no">No</option>
+        </select>
+        </div>
+      </div>
+
+      <!-- Health / Education -->
+      <div id="healthEducationFields" class="hidden">
+        <div class="form-group">
+        <label>Sector:</label>
+        <select name="health_sector">
+          <option value="">Select</option><option>Doctor</option><option>Tutor</option>
+          <option>Pharmacist</option><option>Teacher</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Work Experience (years):</label><input type="number" name="work_experience">
+        </div>
+        <div class="form-group">
+        <label>Monthly Income (₹):</label><input type="number" name="monthly_income">
+        </div>
+      </div>
+
+      <!-- Domestic / Informal -->
+      <div id="informalFields" class="hidden">
+        <div class="form-group">
+        <label>Work Type:</label>
+        <select name="informal_work_type">
+          <option value="">Select</option><option>Housewife</option><option>Helper</option>
+          <option>Street Vendor</option><option>Barber</option><option>Driver</option>
+          <option>Cook</option><option>Maid</option><option>Daily Wage Worker</option>
+          <option>Washerman</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Daily Wage (₹):</label><input type="number" name="informal_wage">
+        </div>
+        <div class="form-group">
+        <label>Working Days / Month:</label><input type="number" name="informal_days">
+        </div>
+        <div class="form-group">
+        <label>Monthly Income (₹):</label><input type="number" name="informal_income">
+        </div>
+        <div class="form-group">
+        <label>House Type:</label>
+        <select name="house_type"><option>Owned</option><option>rented</option></select>
+        </div>
+      </div>
+
+      <!-- Other -->
+      <div id="otherFields" class="hidden">
+        <div class="form-group">
+        <label>Description:</label>
+        <select name="other_description">
+          <option value="">Select</option><option>Retired</option><option>Student</option>
+          <option>Unemployed</option><option>Artist</option>
+        </select>
+        </div>
+        <div class="form-group">
+        <label>Years in Work:</label><input type="number" name="other_years">
+        </div>
+        <div class="form-group">
+        <label>Pension/Subsidy? (Retired)</label>
+        <select name="other_pension"><option>yes</option><option>no</option></select>
+        <input type="text" name="other_pension_amount" placeholder="Pension amount">
+        </div>
+        <div class="form-group">
+        <label>Student Level</label>
+        <select name="other_student">
+          <option value="">Select</option><option>12TH/Diploma</option><option>UG</option><option>PG</option>
+        </select>
+        </div>
+      </div>
+      <!-- ********************************************************** -->
+      <!-- paste ends -->
+    </div>
+
+    <!-- ─── ACTIONS ──────────────────────────────────────────────── -->
+    <div class="actions">
+      <button type="submit" class="btn" id="submitButton">Submit</button>
+      <a href="{{ url_for('bank_data') }}" class="btn secondary" id="nextButton" onclick="return validateAllFields()">Next</a>
+    </div>
+  </form>
+</div>
+
+
+
+<!-- ─── JS ──────────────────────────────────────────────────────── -->
+<script>
+// Add this new function to validate all required fields
+function validateAllFields() {
+  // Check if occupation is selected
+  const occupation = document.getElementById('occupation').value;
+  if (!occupation) {
+    alert('Please select an occupation before proceeding.');
+    return false;
+  }
+  
+  // Check if income range is selected
+  const incomeRange = document.getElementById('income_range').value;
+  if (!incomeRange) {
+    alert('Please select an annual income range before proceeding.');
+    return false;
+  }
+  
+  // Validate occupation-specific required fields
+  let requiredFieldsMissing = false;
+  
+  if (occupation === "Skilled Labor") {
+    const workType = document.querySelector('select[name="skilled_work_type"]').value;
+    const incomeType = document.querySelector('select[name="income_type"]').value;
+    const laborIncome = document.querySelector('input[name="labor_income"]').value;
+    
+    if (!workType || !incomeType || !laborIncome) {
+      requiredFieldsMissing = true;
+    }
+  } else if (occupation === "Agriculture") {
+    const landType = document.querySelector('select[name="land_type"]').value;
+    const landOwnership = document.querySelector('select[name="land_ownership"]').value;
+    
+    if (!landType || !landOwnership) {
+      requiredFieldsMissing = true;
+    }
+  } else if (occupation === "Government") {
+    const govDept = document.querySelector('select[name="gov_dept"]').value;
+    const grossSalary = document.querySelector('input[name="gross_salary"]').value;
+    
+    if (!govDept || !grossSalary) {
+      requiredFieldsMissing = true;
+    }
+  } else if (occupation === "Business") {
+    const businessType = document.querySelector('select[name="business_type"]').value;
+    const monthlyIncome = document.querySelector('input[name="monthly_income"]').value;
+    
+    if (!businessType || !monthlyIncome) {
+      requiredFieldsMissing = true;
+    }
+  } else if (occupation === "Private Sector") {
+    const companyType = document.querySelector('select[name="company_name"]').value;
+    const privateSalary = document.querySelector('input[name="private_salary"]').value;
+    
+    if (!companyType || !privateSalary) {
+      requiredFieldsMissing = true;
+    }
+  }
+  
+  if (requiredFieldsMissing) {
+    alert('Please fill in all required fields for your selected occupation before proceeding.');
+    return false;
+  }
+  
+  // Validate income amount against selected range
+  if (!validateIncomeAmount()) {
+    return false;
+  }
+  
+  return true;
+}
+
+function showOccupationFields(occupation) {
+  // 1. Hide all occupation-specific fields
+  document.querySelectorAll('.dynamic‑wrapper > div').forEach(
+    div => div.classList.add('hidden')
+  );
+
+  // 2. Show the relevant field based on selection
+  if (occupation === "Skilled Labor") {
+    document.getElementById('skilledFields').classList.remove('hidden');
+  } else if (occupation === "Agriculture") {
+    document.getElementById('agricultureFields').classList.remove('hidden');
+  } else if (occupation === "Government") {
+    document.getElementById('governmentFields').classList.remove('hidden');
+  } else if (occupation === "Business") {
+    document.getElementById('businessFields').classList.remove('hidden');
+  } else if (occupation === "Private Sector") {
+    document.getElementById('privateFields').classList.remove('hidden');
+  }
+}
+
+function toggleBusinessDetails(businessType) {
+  // Implementation for business details toggle
+  const smallBusinessDetails = document.getElementById("smallBusinessDetails");
+  const largeBusinessDetails = document.getElementById("largeBusinessDetails");
+  
+  if (smallBusinessDetails && largeBusinessDetails) {
+    if (businessType === "small") {
+      smallBusinessDetails.classList.remove("hidden");
+      largeBusinessDetails.classList.add("hidden");
+    } else if (businessType === "large") {
+      largeBusinessDetails.classList.remove("hidden");
+      smallBusinessDetails.classList.add("hidden");
+    } else {
+      smallBusinessDetails.classList.add("hidden");
+      largeBusinessDetails.classList.add("hidden");
+    }
+  }
+}
+
+function updateAnnualIncome(value) {
+  // Clear any previous error messages
+  const errorElement = document.getElementById('income-error');
+  if (errorElement) {
+    errorElement.remove();
+  }
+}
+
+// Validate annual income against selected range
+function validateIncomeAmount() {
+  const incomeRange = document.getElementById('income_range').value;
+  const laborIncomeField = document.querySelector('input[name="labor_income"]');
+  const privateIncomeField = document.querySelector('input[name="private_salary"]');
+  const govIncomeField = document.querySelector('input[name="gross_salary"]');
+  const businessIncomeField = document.querySelector('input[name="monthly_income"]');
+  
+  // Find which income field is visible/applicable
+  let incomeField = null;
+  let annualIncome = 0;
+  
+  if (laborIncomeField && !laborIncomeField.closest('.hidden')) {
+    incomeField = laborIncomeField;
+    // Convert to annual income (multiply by 12 if monthly)
+    const incomeType = document.querySelector('select[name="income_type"]').value;
+    if (incomeType === "Monthly") {
+      annualIncome = parseFloat(incomeField.value) * 12;
+    } else if (incomeType === "Daily") {
+      // Assuming 25 working days per month
+      annualIncome = parseFloat(incomeField.value) * 25 * 12;
+    }
+  } else if (privateIncomeField && !privateIncomeField.closest('.hidden')) {
+    incomeField = privateIncomeField;
+    annualIncome = parseFloat(incomeField.value) * 12;
+  } else if (govIncomeField && !govIncomeField.closest('.hidden')) {
+    incomeField = govIncomeField;
+    annualIncome = parseFloat(incomeField.value) * 12;
+  } else if (businessIncomeField && !businessIncomeField.closest('.hidden')) {
+    incomeField = businessIncomeField;
+    annualIncome = parseFloat(incomeField.value) * 12;
+  }
+  
+  if (incomeField && incomeRange) {
+    // Clear any previous error messages
+    const existingError = document.getElementById('income-error');
+    if (existingError) {
+      existingError.remove();
+    }
+    
+    // Validate based on selected range
+    if (incomeRange === "below_70000" && annualIncome > 70000) {
+      // Create error message
+      const errorMsg = document.createElement('div');
+      errorMsg.id = 'income-error';
+      errorMsg.style.color = 'red';
+      errorMsg.style.fontSize = '0.8rem';
+      errorMsg.textContent = 'Income amount exceeds the selected range (Below ₹70,000)';
+      
+      // Insert after the income field
+      incomeField.parentNode.appendChild(errorMsg);
+      return false;
+    } else if (incomeRange === "above_70000" && annualIncome <= 70000) {
+      // Create error message
+      const errorMsg = document.createElement('div');
+      errorMsg.id = 'income-error';
+      errorMsg.style.color = 'red';
+      errorMsg.style.fontSize = '0.8rem';
+      errorMsg.textContent = 'Income amount is below the selected range (Above ₹70,000)';
+      
+      // Insert after the income field
+      incomeField.parentNode.appendChild(errorMsg);
+      return false;
+    }
+  }
+  
+  return true;
+}
+
+// Add event listeners to income fields
+document.addEventListener('DOMContentLoaded', () => {
+  const occupation = document.getElementById('occupation').value;
+  if (occupation) {
+    showOccupationFields(occupation);
+  }
+  
+  // Add validation to the form submission
+  document.getElementById('loanForm').addEventListener('submit', function(event) {
+    if (!validateIncomeAmount()) {
+      event.preventDefault(); // Prevent form submission if validation fails
+    }
+  });
+  
+  // Add validation to income fields on change
+  const incomeFields = document.querySelectorAll('input[name="labor_income"], input[name="private_salary"], input[name="gross_salary"], input[name="monthly_income"]');
+  incomeFields.forEach(field => {
+    field.addEventListener('change', validateIncomeAmount);
+  });
+});
+</script>
+
+
+</body>
+</html>

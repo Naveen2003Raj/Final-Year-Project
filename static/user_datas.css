@@ -1,0 +1,137 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Add fallback fonts for older browsers */
+    background: linear-gradient(to right, #263238, #37474f);
+    margin: 0;
+    padding: 20px;
+    color: #f5f5f5;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffca28;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+form {
+    background: #1e1e1e;
+    padding: 35px;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(255, 202, 40, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+form:hover {
+    transform: scale(1.01);
+}
+
+.container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.left, .right {
+    flex: 1;
+    min-width: 250px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: 600;
+    color: #fdd835;
+    transition: color 0.3s;
+}
+
+label:hover {
+    color: #ffeb3b;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 80%;
+    padding: 12px;
+    border: 2px solid #555;
+    border-radius: 8px;
+    background-color: #263238;
+    color: #ffffff;
+    font-size: 15px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: #ffca28;
+    box-shadow: 0 0 8px #ffca28;
+    outline: none;
+}
+
+select {
+    background-color: #2e3b3e;
+}
+
+input[readonly] {
+    background-color: #424242;
+    cursor: not-allowed;
+    color: #b0bec5;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Section separators */
+.right > div {
+    padding: 20px;
+    margin-top: 15px;
+    border: 1px solid #444;
+    border-radius: 10px;
+    background-color: #263238;
+    transition: transform 0.2s;
+}
+
+.right > div:not(.hidden)::before {
+    content: attr(id);
+    text-transform: capitalize;
+    font-size: 17px;
+    color: #ffab00;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.right > div:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(255, 171, 0, 0.2);
+}
+
+input[type="submit"], button {
+    margin-top: 20px;
+    background-color: #ff6f00;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: #e65100;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}

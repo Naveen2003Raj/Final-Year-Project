@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banker Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Banker Info -->
+        <div class="banker-details">
+            <h3>{{ banker_name }} (ID: {{ banker_id }})</h3>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div class="dashboard-main">
+            <h1>Banker Dashboard</h1>
+            <table>
+                <thead>
+                  <tr>
+                    <th>Sl.No</th>
+                    <th>User Name</th>
+                    <th>Account Creation</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in user_list %}
+                    {% set idx = loop.index %}
+                    <tr>
+                      <td>{{ idx }}</td>
+                      <td>{{ user[1] }}</td>
+                      <td>{{ user[2] }}</td>  <!-- Account creation date -->
+                      <td><a href="{{ url_for('view_user', user_id=user[0]) }}">View</a></td>  <!-- View button for user details -->
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+                           
+        </div>
+    </div>
+
+    <!-- Search Filter Script -->
+    <script>
+        function filterTable() {
+            let input = document.getElementById("searchInput").value.toUpperCase();
+            let filterValue = document.getElementById("matchFilter").value;
+            let table = document.getElementById("userTable");
+            let tr = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < tr.length; i++) {
+                let tdName = tr[i].getElementsByTagName("td")[1];
+                let tdMatch = tr[i].getElementsByTagName("td")[3];
+                if (tdName && tdMatch) {
+                    let nameText = tdName.textContent || tdName.innerText;
+                    let matchText = tdMatch.textContent || tdMatch.innerText;
+
+                    let nameMatch = nameText.toUpperCase().includes(input);
+                    let matchFilter = filterValue === "All" || matchText === filterValue;
+
+                    tr[i].style.display = nameMatch && matchFilter ? "" : "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

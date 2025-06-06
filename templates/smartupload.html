@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Card Upload</title>
+    <link rel="stylesheet" href="../static/smart_upload.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Smart Card Upload Form -->
+        <div class="upload-box">
+            <h2>Upload Smart Card Image</h2>
+            <form action="/smart_upload" method="POST" enctype="multipart/form-data">
+                <input type="file" name="smartFile" required>
+                <button type="submit">Upload Smart Card</button>
+            </form> 
+        </div>
+
+        {% if error %}
+            <p class="error" style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        {% if session.get('card_number') %}
+        <!-- Show card details only if card_number exists -->
+        <div class="card-details">
+            <h4>Card Details:</h4>
+            <ul>
+                <li><strong>Card Number:</strong> {{ session['card_number'] }}</li>
+                <li><strong>Card Type:</strong> {{ session['card_type'] }}</li>
+                <li><strong>Head of Family:</strong> {{ session['head_of_family'] }}</li>
+                <li><strong>Date of Birth:</strong> {{ session['dob'] }}</li>
+                <li><strong>Gender:</strong> {{ session['gender'] }}</li>
+                <li><strong>Mobile:</strong> {{ session['mobile'] }}</li>
+                <li><strong>Address:</strong> {{ session['address'] }}</li>
+                <li><strong>Family Members:</strong> {{ session['family_members'] }}</li>
+                {% if session.get('family_names') %}
+                <li><strong>Family Names:</strong>
+                    <ul>
+                    {% for name in session.get('family_names', []) %}
+                        <li>{{ name }}</li>
+                    {% endfor %}
+                    </ul>
+                </li>
+                {% endif %}
+                <li><strong>Entitlement:</strong> {{ session['entitlement'] }}</li>
+                <li><strong>Issue Date:</strong> {{ session['issue_date'] }}</li>
+                <li><strong>Issued By:</strong> {{ session['issued_by'] }}</li>
+                <li><strong>Aadhaar Link Status:</strong> {{ session['aadhaar_link_status'] }}</li>
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if match_result %}
+        <p><strong>Status:</strong> 
+            <span style="color: {% if '✅' in match_result %}green{% else %}red{% endif %}; font-weight: bold;">
+                {{ match_result }}
+            </span>
+        </p>
+        <a href="{{ url_for('user_form') }}" class="next-button">Next</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>

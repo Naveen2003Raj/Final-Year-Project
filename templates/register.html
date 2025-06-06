@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account</title>
+    <link rel="stylesheet" type="text/css" href="../static/register.css"> 
+    <script>
+        let generatedOtp = null;
+
+        function sendOTP() {
+            const mobile = document.querySelector('input[name="mobile"]').value;
+            if (mobile.length === 10) {
+                generatedOtp = Math.floor(100000 + Math.random() * 900000);
+                alert("OTP generated successfully!");
+                console.log("OTP:", generatedOtp);
+                // Display OTP field after generating OTP
+                document.getElementById('otpField').style.display = 'block';
+            } else {
+                alert("Please enter a valid 10-digit mobile number first.");
+            }
+        }
+
+        function verifyOTP() {
+            const enteredOtp = document.querySelector('#otp').value;
+            if (parseInt(enteredOtp) === generatedOtp) {
+                alert("OTP Verified Successfully!");
+            } else {
+                alert("Incorrect OTP. Please try again.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Account</h2>
+        <form method="POST">
+            <input type="text" name="name" placeholder="Name" required><br>
+
+            <div class="mobile-input">
+                <input type="text" name="mobile" placeholder="Mobile Number" required>
+                <button type="button" onclick="sendOTP()">Send OTP</button>
+            </div><br>
+
+            <!-- OTP field (hidden initially) -->
+            <div id="otpField" style="display:none;">
+                <input type="text" id="otp" placeholder="Enter OTP" required>
+                <button type="button" onclick="verifyOTP()">Verify OTP</button><br><br>
+            </div>
+
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

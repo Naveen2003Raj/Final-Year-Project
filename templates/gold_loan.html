@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Loan Form</title>
+    <link rel="stylesheet" href="../static/gold_loan.css">
+
+</head>
+<body>
+    <div class="container">
+        <h2>Gold Loan Form</h2>
+        
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        
+        <form action="{{ url_for('gold_loan_form') }}" method="POST">
+            <div class="form-group">
+                <label for="loan_amount">Loan Amount:</label>
+                <select name="loan_amount" id="loan_amount" required>
+                    <option value="">-- Select Loan Amount --</option>
+                    <option value="Less than 80k">Less than ₹80,000</option>
+                    <option value="Above 80K">More than ₹80,000</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="workers">Workers:</label>
+                <select name="workers" id="workers" required>
+                    <option value="">-- Select Workers --</option>
+                    <option value="Farmer">Farmer</option>
+                    <option value="Housewife">Housewife</option>
+                    <option value="Small Business">Small Business</option>
+                    <option value="daily wages">daily wages</option>
+                    <option value="Banker">Banker</option>
+                    <option value="Government staff">Government staff</option>
+                </select>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="gold_type">Gold Type:</label>
+                <select name="gold_type" id="gold_type" required>
+                    <option value="">-- Select Gold Type --</option>
+                    <option value="Ornament">Ornament</option>
+                    <option value="Coin">Coin</option>
+                    <option value="Bar">Bar</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="gold_weight">Gold Weight:</label>
+                <select name="gold_weight" id="gold_weight" required>
+                    <option value="">-- Select Gold Weight --</option>
+                    <option value="Less than 20g">Less than 20g</option>
+                    <option value="20g to 40g">20g to 40g</option>
+                    <option value="Above 40g">Above 40g</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="gold_purity">Gold Purity:</label>
+                <select name="gold_purity" id="gold_purity" required>
+                    <option value="">-- Select Gold Purity --</option>
+                    <option value="18K">18K</option>
+                    <option value="22K">22K</option>
+                    <option value="24K">24K</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="purpose_of_loan">Purpose of Loan:</label>
+                <select name="purpose_of_loan" id="purpose_of_loan" required>
+                    <option value="">-- Select Purpose of Loan --</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Crop Investment">Crop Investment</option>
+                    <option value="Marriage">Marriage</option>
+                    <option value="Business">Business</option>
+                    <option value="Education">Education</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="repayment_years">Repayment Years:</label>
+                <select name="repayment_years" id="repayment_years" required>
+                    <option value="">-- Select Repayment Period --</option>
+                    <option value="1">1 year</option>
+                    <option value="2">2 years</option>
+                    <option value="3">3 years</option>
+                    <option value="More than 3">More than 3 years</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="interest_rate">Interest Rate:</label>
+                <select name="interest_rate" id="interest_rate" required>
+                    <option value="">-- Select Interest Rate --</option>
+                    <option value="7%">7%</option>
+                    <option value="8%">8%</option>
+                    <option value="9%">9%</option>
+                    <option value="10%">10%</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="subsidy_type">Subsidy </label>
+                <select name="subsidy_type" id="subsidy_type" required>
+                    <option value="">-- Select Subsidy Type --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="ration_card_type">Ration Card Type:</label>
+                <select name="ration_card_type" id="ration_card_type" required>
+                    <option value="">-- Select Ration Card Type --</option>
+                    <option value="PHH">PHH (Above Poverty Line)</option>
+                    <option value="NPHH">NPHH (Below Poverty Line)</option>
+                    <option value="PHH AYY">PHH AYY (Above Poverty Line)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="annual_income">Annual Income:</label>
+                <select name="annual_income" id="annual_income" required>
+                    <option value="">-- Select Annual Income --</option>
+                    <option value="Below 80k">Below ₹80,000</option>
+                    <option value="Above 80K">Above ₹80,000</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="provider_bank">Provider Bank:</label>
+                <select name="provider_bank" id="provider_bank" required>
+                    <option value="">-- Select Provider Bank --</option>
+                    <option value="Indian Bank">Indian Bank</option>
+                    <option value="SBI">State Bank of India</option>
+                    <option value="Grama Bank">Grama Bank</option>
+                    <option value="IOB">IOB</option>
+                    <option value="Axis bank">Axis bank</option>
+                    <option value="coperation Bank">coperation Bank</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pension">Pension:</label>
+                <select name="pension" id="pension" required>
+                    <option value="">-- Select Pension --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="already_loan_waived">Already Loan Waived:</label>
+                <select name="already_loan_waived" id="already_loan_waived" required>
+                    <option value="">-- Select Option --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+            

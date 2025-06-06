@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+/* General styles for the upload page */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color:#4197df;
+    padding: 20px;
+    }
+    
+    .main-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .upload-box {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .upload-box input[type="file"] {
+        padding: 10px;
+        margin: 10px 0;
+    }
+    
+    .upload-box button {
+        padding: 12px 30px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .upload-box button:hover {
+        background-color: #45a049;
+    }
+    
+    .result-box {
+        margin-top: 20px;
+    }
+    
+    .error {
+        color: red;
+        text-align: center;
+    }
+    
+    .next-button {
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+        font-size: 16px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        text
+    

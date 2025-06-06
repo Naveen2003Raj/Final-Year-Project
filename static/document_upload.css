@@ -1,0 +1,180 @@
+/* Background & Page Layout */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ddeefc, #c1dfff);
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Container */
+.container {
+    max-width: 950px;
+    margin: 50px auto;
+    background: #f9fbfe; /* Softer contrast with body */
+    padding: 35px 45px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-size: 28px;
+}
+
+/* Button Group */
+.button-group {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.btn {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    margin: 0 10px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #4924ba, #1f62f0);
+    transform: scale(1.05);
+}
+
+/* Upload Forms */
+.upload-form {
+    margin-bottom: 20px;
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+    padding: 20px;
+    background-color: #eef4fb;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.upload-form input[type="file"] {
+    margin-top: 10px;
+    font-size: 15px;
+    padding: 5px;
+}
+
+/* Submit Button */
+.submit-btn {
+    display: block;
+    margin: 25px auto 10px auto;
+    padding: 12px 35px;
+    background: linear-gradient(to right, #00b09b, #96c93d);
+    color: white;
+    border: none;
+    font-size: 17px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn:hover {
+    background: linear-gradient(to right, #019875, #88b331);
+    transform: scale(1.05);
+}
+
+/* Spinner */
+.spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    display: none;
+}
+
+/* Result Section */
+.result-section {
+    margin-top: 30px;
+    animation: fadeIn 1s ease-in-out;
+    display: none;
+    background: #e8f0ff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Status */
+.match-status, .cross-match {
+    text-align: center;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Cards Wrapper */
+.card-wrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1 1 45%;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    border-left: 5px solid #3498db;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+.card h4 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.card p {
+    margin: 6px 0;
+    font-size: 15px;
+}
+
+/* Next Button */
+.next-button {
+    display: none;
+    margin-top: 30px;
+    padding: 12px 30px;
+    background: linear-gradient(to right, #ff512f, #dd2476);
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.next-button:hover {
+    background: linear-gradient(to right, #e84118, #c23616);
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}

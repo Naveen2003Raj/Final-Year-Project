@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Data</title>
+    <link rel="stylesheet" href="../static/fetch_data.css">
+</head>
+<body>    
+<div class="user-record">
+    <h2>Loan and Bank Data</h2>
+        {% for row in loan_records %}
+    <table>
+        <tbody>
+            <tr><th>Name</th><td>{{ row[0] }}</td></tr>
+            <tr><th>Aadhaar Number</th><td>{{ row[1] }}</td></tr>
+            <tr><th>Smart Card Number </th><td>{{ row[2] }}</td></tr>
+            <tr><th>Address</th><td>{{ row[3] }}</td></tr>
+            <tr><th>Mobile Number</th><td>{{ row[4] }}</td></tr>
+            <tr><th>Account Number</th><td>{{ row[5] }}</td></tr>
+            <tr><th>Bank Name</th><td>{{ row[6] }}</td></tr>
+            <tr><th>Branch</th><td>{{ row[7] }}</td></tr>
+            <tr><th>IFSC Code</th><td>{{ row[8] }}</td></tr>
+            <tr><th>Account Type</th><td>{{ row[9] }}</td></tr>
+            <tr><th>Subsidy Applied</th><td>{{ row[10] }}</td></tr>
+        </tbody>
+    </table>
+        {% endfor %}    
+</div>
+<div class="action-buttons">    
+    <a href="{{ url_for('select_scheme') }}" class="btn">Next</a>    
+</div>    
+</body>
+</html>

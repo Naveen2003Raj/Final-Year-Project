@@ -1,0 +1,182 @@
+/* =============== Global Reset & Base =============== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  background: #484b6e;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* =============== Container & Title =============== */
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 2rem;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #1f2937;
+}
+
+/* =============== Form Layout =============== */
+form {
+  background: #ffffff;
+  border: 1px solid #dde2e8;
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+form:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* =============== Uniform 2-Column Grid =============== */
+.grid‑two {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* =============== Form Group =============== */
+.form‑group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+}
+
+label {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #374151;
+  min-height: 1.5rem;
+}
+
+input,
+select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f8fafc;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+input:focus,
+select:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.3);
+  outline: none;
+}
+
+input[readonly] {
+  background: #e5e7eb;
+}
+
+/* =============== Dynamic Section Styling =============== */
+.dynamic‑wrapper > div:not(.hidden) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1.5rem;
+}
+
+.dynamic‑wrapper > div:not(.hidden) .form‑group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+}
+
+.dynamic‑wrapper > div:not(.hidden) label,
+.dynamic‑wrapper > div:not(.hidden) input,
+.dynamic‑wrapper > div:not(.hidden) select {
+  font-size: 1rem;
+  width: 100%;
+}
+
+.dynamic‑wrapper > div:not(.hidden) input,
+.dynamic‑wrapper > div:not(.hidden) select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #f8fafc;
+  margin-bottom: 0.75rem;
+}
+
+.dynamic‑wrapper > div:not(.hidden) input:focus,
+.dynamic‑wrapper > div:not(.hidden) select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* =============== Hide Class =============== */
+.hidden {
+  display: none;
+}
+
+/* =============== Buttons =============== */
+.actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #3b82f6;
+  color: #fff;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  background: #2563eb;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+}
+
+.btn.secondary {
+  background: #64748b;
+}
+
+.btn.secondary:hover {
+  background: #475569;
+}
+/* Hide scrollbar for all elements (Webkit browsers like Chrome, Safari) */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* =============== Responsive =============== */
+@media (max-width: 480px) {
+  .grid‑two,
+  .dynamic‑wrapper > div:not(.hidden) {
+    grid-template-columns: 1fr;
+  }
+}
